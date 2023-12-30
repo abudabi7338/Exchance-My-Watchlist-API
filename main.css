@@ -1,3 +1,81 @@
-body{
-    background-color: #fff;
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+html {
+	font-size: 62.5%;
+}
+:root {
+	--background-color: #fff;
+	--background-color-2: #e4e4e4;
+	--font-color-tittle: #939090;
+	--font-color-text: #272626;
+	--font-color-text-plus: rgb(54, 174, 70);
+	--font-color-text-minus: rgb(238, 44, 44);
+	--font-size-tittle: 1.5rem;
+	--font-size-symbols: 2rem;
+	--icon-size: 4.3rem;
+	--font-size-name: 1.2rem;
+	--font-size-price: 1.5rem;
+	
+	--font-family: 'Roboto', sans-serif;
+}
+
+body {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: var(--font-family);
+	background-color: var(--background-color);
+}
+
+.fa-chart-line {
+	font-size: var(--font-size-tittle);
+}
+.tittle {
+	font-size: var(--font-size-tittle);
+	font-weight: bold;
+	color: var(--font-color-tittle);
+}
+.main {
+	width: 250px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+.stock {
+	border-radius: 2px;
+	display: flex;
+	justify-content: space-between;
+}
+
+i {
+	font-size: var(--icon-size);
+	padding: 0em 0.2em;
+}
+
+.symbols {
+	font-size: var(--font-size-symbols);
+	font-weight: bold;
+	text-align: left;
+}
+
+.full-name {
+	font-size: var(--font-size-name);
+	text-align: left;
+}
+
+.price {
+	color: var(--font-color-text-plus);
+    font-size: var(--font-size-price);
+}
+
+.prices .change{
+    color: var(--background-color);
+    background-color:var(--font-color-text-plus);
+    font-size: var(--font-size-price);
+    border-radius: 3px;
 }
