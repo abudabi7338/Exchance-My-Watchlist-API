@@ -1,19 +1,51 @@
-const apiKey = '4c0a558fbc790e049a2671a70c17702f'
-const apiUrl = 'http://api.marketstack.com/v1/eod'
+const price = document.querySelector('.price')
+const change = document.querySelector('.change')
+const symbol = document.querySelector('.symbols')
+const name = document.querySelector('.full-name')
+
+const stock1Prices = document.getElementById('stock-1').querySelector('.price')
+const stock2Prices = document.getElementById('stock-2').querySelector('.price')
+const stock3Prices = document.getElementById('stock-3').querySelector('.price')
+
+const stock1Change = document.getElementById('stock-1').querySelector('.change')
+const stock2Change = document.getElementById('stock-2').querySelector('.change')
+const stock3Change = document.getElementById('stock-3').querySelector('.change')
+
+const apiToken = 'mWEU6UDFimZTEog7gQ4l4NZCsLQciWU23wZpb36p'
+const symbols = 'AAPL'
+
+const apiUrl = `https://api.stockdata.org/v1/data/quote?api_token=${apiToken}&symbols=${symbols}`
+
+async function getStockData() {
+	try {
+		const response = await fetch(apiUrl)
+		const data = await response.json()
+
+		if (data.meta.returned > 0) {
+			data.data.forEach(stockInfo => {
+				const ticker = stockInfo.ticker
+				const name = stockInfo.name
+				const price = stockInfo.price
+				const dayChange = stockInfo.day_change
+
+				console.log(`Symbol: ${ticker}, Nazwa: ${name}, Cena: ${price}, Zmiana dzienna: ${dayChange}%`)
+			})
+		} else {
+			console.log('Brak wyników.')
+		}
+	} catch (error) {
+		console.error('Wystąpił błąd podczas pobierania danych z API:', error)
+	}
+}
+
+getStockData()
+
+stock1Prices.textContent = 'price'
+stock2Prices.textContent = 'price'
+stock3Prices.textContent = 'price'
+
+stock1Change.textContent = 'change'
+stock2Change.textContent = 'change'
+stock3Change.textContent = 'change'
 
 
-fetch(apiUrl, {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-    
-    console.log(data);
-  })
-  .catch(error => {
-    console.error('Błąd pobierania danych:', error);
-  });
