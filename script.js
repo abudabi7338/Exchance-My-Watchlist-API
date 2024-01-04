@@ -1,51 +1,53 @@
-const price = document.querySelector('.price')
-const change = document.querySelector('.change')
-const symbol = document.querySelector('.symbols')
-const name = document.querySelector('.full-name')
+const apiToken = '#####'
 
-const stock1Prices = document.getElementById('stock-1').querySelector('.price')
-const stock2Prices = document.getElementById('stock-2').querySelector('.price')
-const stock3Prices = document.getElementById('stock-3').querySelector('.price')
+const stockSymbols = ['AAPL', 'MSFT', 'AMZN']
 
-const stock1Change = document.getElementById('stock-1').querySelector('.change')
-const stock2Change = document.getElementById('stock-2').querySelector('.change')
-const stock3Change = document.getElementById('stock-3').querySelector('.change')
+function updateStockData(symbolElement, priceElement, changeElement, apiToken, symbol) {
+	const apiUrl = `https://api.stockdata.org/v1/data/quote?api_token=${apiToken}&symbols=${symbol}`
 
-
-const symbols = 'AAPL'
-
-const apiUrl = `https://api.stockdata.org/v1/data/quote?api_token=${apiToken}&symbols=${symbols}`
-
-async function getStockData() {
 	try {
-		const response = await fetch(apiUrl)
-		const data = await response.json()
+		fetch(apiUrl)
+			.then(response => response.json())
+			.then(data => {
+				if (data.meta.returned > 0) {
+					const stockInfo = data.data[0]
+					const price = stockInfo.price
+					const dayChange = stockInfo.day_change
 
-		if (data.meta.returned > 0) {
-			data.data.forEach(stockInfo => {
-				const ticker = stockInfo.ticker
-				const name = stockInfo.name
-				const price = stockInfo.price
-				const dayChange = stockInfo.day_change
+					symbolElement.textContent = stockInfo.ticker
+					priceElement.textContent = `${price}`
+					changeElement.textContent = `${dayChange}%`
 
-				console.log(`Symbol: ${ticker}, Nazwa: ${name}, Cena: ${price}, Zmiana dzienna: ${dayChange}%`)
+					if (dayChange < 0) {
+						changeElement.style.backgroundColor = 'var(--font-color-text-minus)'
+					} else {
+					}
+				} else {
+					console.log('Brak wyników.')
+				}
 			})
-		} else {
-			console.log('Brak wyników.')
-		}
+			.catch(error => console.error('Wystąpił błąd podczas pobierania danych z API:', error))
 	} catch (error) {
 		console.error('Wystąpił błąd podczas pobierania danych z API:', error)
 	}
 }
 
+function getStockData() {
+	const stock1Symbol = document.getElementById('stock-1').querySelector('.symbols')
+	const stock1Price = document.getElementById('stock-1').querySelector('.price')
+	const stock1Change = document.getElementById('stock-1').querySelector('.change')
+
+	const stock2Symbol = document.getElementById('stock-2').querySelector('.symbols')
+	const stock2Price = document.getElementById('stock-2').querySelector('.price')
+	const stock2Change = document.getElementById('stock-2').querySelector('.change')
+
+	const stock3Symbol = document.getElementById('stock-3').querySelector('.symbols')
+	const stock3Price = document.getElementById('stock-3').querySelector('.price')
+	const stock3Change = document.getElementById('stock-3').querySelector('.change')
+
+	updateStockData(stock1Symbol, stock1Price, stock1Change, apiToken, stockSymbols[0])
+	updateStockData(stock2Symbol, stock2Price, stock2Change, apiToken, stockSymbols[1])
+	updateStockData(stock3Symbol, stock3Price, stock3Change, apiToken, stockSymbols[2])
+}
+
 getStockData()
-
-stock1Prices.textContent = 'price'
-stock2Prices.textContent = 'price'
-stock3Prices.textContent = 'price'
-
-stock1Change.textContent = 'change'
-stock2Change.textContent = 'change'
-stock3Change.textContent = 'change'
-
-

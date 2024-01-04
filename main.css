@@ -13,7 +13,7 @@ html {
 	--font-color-tittle: #3a3a3a;
 	--font-color-text: #272626;
 	--font-color-text-plus: rgb(54, 174, 70);
-	--font-color-text-minus: rgb(238, 44, 44);
+	--font-color-text-minus: rgb(211, 88, 88);
 	--font-size-tittle: 1.5rem;
 	--font-size-symbols: 2rem;
 	--icon-size: 4.3rem;
@@ -69,8 +69,8 @@ body {
 
 .icon {
 	border-radius: 50%;
-	width: 6em;
-	height: 6em;
+	width: 1em;
+	height: 1em;
 
 }
 .names {
@@ -125,5 +125,11 @@ body {
 @media (min-width: 401px) {
 	.tittle {
 		font-size: 2rem;
+	
+	}.icon{
+		width: 6em;
+	height: 6em;
 	}
+
+	
 }
