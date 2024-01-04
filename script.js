@@ -11,7 +11,7 @@ const stock1Change = document.getElementById('stock-1').querySelector('.change')
 const stock2Change = document.getElementById('stock-2').querySelector('.change')
 const stock3Change = document.getElementById('stock-3').querySelector('.change')
 
-const apiToken = 'mWEU6UDFimZTEog7gQ4l4NZCsLQciWU23wZpb36p'
+
 const symbols = 'AAPL'
 
 const apiUrl = `https://api.stockdata.org/v1/data/quote?api_token=${apiToken}&symbols=${symbols}`
