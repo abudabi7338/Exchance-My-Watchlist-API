@@ -1,4 +1,8 @@
-const apiToken = '#####'
+
+import config from './config.js'
+
+
+const apiToken = config.apiKey
 
 const stockSymbols = ['AAPL', 'MSFT', 'AMZN']
 
